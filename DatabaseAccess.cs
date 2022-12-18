@@ -33,5 +33,33 @@ namespace New_Coding_Tracker
                 connection.Close();
             }
         }
+
+        // Insert Table
+        public static void InsertTable() // need parameters like date, startTime, endTime, etc.
+        {
+
+        }
+
+        // Update Table
+        public static void UpdateTable()
+        {
+
+        }
+
+
+        // Delete Table
+        public static void DeleteTable()
+        {
+
+        }
+
+        // View Table
+        public static void ViewTable()
+        {
+
+        }
+
+
+
     }
 }
