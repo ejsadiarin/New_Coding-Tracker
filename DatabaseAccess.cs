@@ -35,9 +35,22 @@ namespace New_Coding_Tracker
         }
 
         // Insert Table
-        public static void InsertTable() // need parameters like date, startTime, endTime, etc.
+        public static void InsertTable(string duration, string startTime, string endTime) // need parameters like date, startTime, endTime, etc.
         {
+            using (var connection = SqliteConnection(connectionString))
+            {
+                connection.Open();
+                using (var cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = "INSERT INTO codingtracker (StartTime, EndTime, Duration) VALUES (@startTime, @endTime, @duration)";
+                    cmd.Parameters.AddWithValue("@startTime", startTime);
+                    cmd.Parameters.AddWithValue("@endTime", endTime);
+                    cmd.Parameters.AddWithValue("@duration", duration);
+                    cmd.Prepare();
 
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         // Update Table
