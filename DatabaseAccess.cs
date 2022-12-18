@@ -10,7 +10,7 @@ namespace New_Coding_Tracker
 {
     public class DatabaseAccess
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        internal static string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
         
         // Create Table
         public static void CreateTable()
@@ -35,9 +35,9 @@ namespace New_Coding_Tracker
         }
 
         // Insert Table
-        public static void InsertTable(string duration, string startTime, string endTime) // need parameters like date, startTime, endTime, etc.
+        public static void InsertTable(string duration, string startTime, string endTime)
         {
-            using (var connection = SqliteConnection(connectionString))
+            using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
@@ -54,7 +54,7 @@ namespace New_Coding_Tracker
         }
 
         // Update Table
-        public static void UpdateTable()
+        public static void UpdateTable(int id, )
         {
 
         }
