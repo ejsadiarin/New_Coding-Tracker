@@ -8,8 +8,8 @@ namespace New_Coding_Tracker
 {
     internal class Controller
     {
-        // CRUD CONTROLLER
+        // CRUD CONTROLLER, using methods from UserInput and DatabaseAccess class
 
-
+        // Calculate duration method here
     }
 }

@@ -29,21 +29,22 @@ namespace New_Coding_Tracker
 
                 switch (userInput.ToUpper())
                 {
-                    case 'A':
+                    case "A":
                         Console.WriteLine("You selected to add a record.\n");
-
+                        // add method from Controller class, that uses DatabaseAccess class
                         break;
-                    case 'V':
+                    case "V":
                         Console.WriteLine("Here are your current records:\n");
                         break;
-                    case 'U':
+                    case "U":
                         Console.WriteLine("Choose the ID of the record you want to update.\n");
                         break;
-                    case 'D':
+                    case "D":
                         Console.WriteLine("What ID of the record you want to delete.\n ");
                         break;
-                    case 'Q':
+                    case "Q":
                         notRunning = true;
+                        break;
 
                 }
 

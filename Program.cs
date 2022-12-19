@@ -7,7 +7,9 @@ namespace New_Coding_Tracker
     {
         static void Main(string[] args)
         {
-
+            // instantiate classes
+            
+            // add the methods here
         }
     }
 }
