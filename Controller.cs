@@ -8,6 +8,8 @@ namespace New_Coding_Tracker
 {
     public class Controller
     {
+        public static List<CodingSession> table = new List<CodingSession>();
+
         // CRUD CONTROLLER, using methods from UserInput and DatabaseAccess class
         public void AddRecord()
         {
