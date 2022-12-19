@@ -9,10 +9,11 @@ namespace New_Coding_Tracker
         {
             // instantiate classes
             Model model = new Model();
+            DatabaseAccess dbAccess = new DatabaseAccess();
 
             // add the methods here
+            dbAccess.CreateTable();
             model.MainMenu();
-
 
 
         }

@@ -13,7 +13,15 @@ namespace New_Coding_Tracker
         // CRUD CONTROLLER, using methods from UserInput and DatabaseAccess class
         public void AddRecord()
         {
+            var date = table[1];
+            var startTime = table[2];
+            var endTime = table[3];
 
+            // call CalculateDuration method here
+            var duration = CalculateDuration(table[4]);
+
+            DatabaseAccess dbAccess = new DatabaseAccess();
+            dbAccess.InsertTable(date, startTime, endTime, duration);
         }
         public void ViewRecord()
         {
@@ -21,6 +29,7 @@ namespace New_Coding_Tracker
         }
         public void UpdateRecord()
         {
+            // call CalculateDuration method here
 
         }
         public void DeleteRecord()
@@ -31,7 +40,7 @@ namespace New_Coding_Tracker
 
 
         // Calculate duration method here
-        public TimeSpan CalculateDuration()
+        public TimeSpan CalculateDuration(CodingSession t)
         {
             UserInput userInput = new UserInput();
             Validation validation = new Validation();

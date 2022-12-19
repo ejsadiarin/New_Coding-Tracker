@@ -5,15 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using Microsoft.Data.Sqlite;
+using static New_Coding_Tracker.CodingSession;
 
 namespace New_Coding_Tracker
 {
     public class DatabaseAccess
     {
-        internal static string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-        
+        internal string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+
         // Create Table
-        public static void CreateTable()
+        public void CreateTable()
         {
             using (var connection = new SqliteConnection(connectionString))
             {
@@ -32,12 +33,11 @@ namespace New_Coding_Tracker
 
                 tableCmd.ExecuteNonQuery();
                 
-                connection.Close();
             }
         }
 
         // Insert Table
-        public static void InsertTable(string date, string startTime, string endTime, string duration)
+        public void InsertTable(CodingSession date, CodingSession startTime, CodingSession endTime, CodingSession duration)
         {
             using (var connection = new SqliteConnection(connectionString))
             {
@@ -57,7 +57,7 @@ namespace New_Coding_Tracker
         }
 
         // Update Table
-        public static void UpdateTable(int id, string startTime, string endTime, string duration)
+        public void UpdateTable(CodingSession id, CodingSession startTime, CodingSession endTime, CodingSession duration)
         {
             using (var connection = new SqliteConnection(connectionString))
             {
@@ -78,7 +78,7 @@ namespace New_Coding_Tracker
 
 
         // Delete Table
-        public static void DeleteTable(int id)
+        public void DeleteTable(CodingSession id)
         {
             using (var connection = new SqliteConnection(connectionString)) 
             {
@@ -95,7 +95,7 @@ namespace New_Coding_Tracker
         }
 
         // View Table
-        public static void ViewTable()
+        public void ViewTable()
         {
             using (var connection = new SqliteConnection(connectionString))
             {
