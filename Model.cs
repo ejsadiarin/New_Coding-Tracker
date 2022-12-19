@@ -17,6 +17,7 @@ namespace New_Coding_Tracker
             while (!notRunning) 
             {
                 Console.WriteLine("MAIN MENU\n");
+                Console.WriteLine("Welcome to your Coding Tracker!\n");
                 Console.WriteLine("What would you like to do?");
                 Console.WriteLine("Choose from the options below:\n");
                 Console.WriteLine("Enter A - to add record");
