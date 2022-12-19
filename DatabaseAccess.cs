@@ -54,9 +54,23 @@ namespace New_Coding_Tracker
         }
 
         // Update Table
-        public static void UpdateTable(int id, )
+        public static void UpdateTable(int id, string startTime, string endTime, string duration)
         {
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                using (var cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = "UPDATE codingtracker "; // THIS
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@startTime", startTime);
+                    cmd.Parameters.AddWithValue("@endTime", endTime);
+                    cmd.Parameters.AddWithValue("@duration", duration);
+                    cmd.Prepare();
 
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
 
