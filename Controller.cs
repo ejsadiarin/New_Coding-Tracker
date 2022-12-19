@@ -38,6 +38,7 @@ namespace New_Coding_Tracker
             TimeSpan end = userInput.timeEnd;
             validation.ValidateTime();
             TimeSpan duration = end - start;
+            validation.isDurationNegative(duration);
 
             return duration;
         }
