@@ -17,9 +17,17 @@ namespace New_Coding_Tracker
 
 
         // Calculate duration method here
-        public void CalculateDuration()
+        public TimeSpan CalculateDuration()
         {
+            UserInput userInput = new UserInput();
+            Validation validation = new Validation();
 
+            TimeSpan start = userInput.timeStart;
+            TimeSpan end = userInput.timeEnd;
+            validation.ValidateTime();
+            TimeSpan duration = end - start;
+
+            return duration;
         }
     
     

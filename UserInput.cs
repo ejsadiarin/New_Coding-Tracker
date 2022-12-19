@@ -9,6 +9,9 @@ namespace New_Coding_Tracker
 {
     public class UserInput
     {
+        internal TimeSpan timeStart;
+        internal TimeSpan timeEnd;
+
         public DateTime GetDateInput()
         {
             string dateString = Console.ReadLine();
@@ -20,7 +23,6 @@ namespace New_Coding_Tracker
         {
             // Format is: Hours:Minutes:Seconds so 00:00:00
             string startTimeString = Console.ReadLine();
-            TimeSpan timeStart;
             while (!TimeSpan.TryParse(startTimeString, out timeStart))
             {
                 Console.WriteLine("Invalid time format.");
@@ -32,7 +34,6 @@ namespace New_Coding_Tracker
         public TimeSpan GetEndTime()
         {
             string endTimeString = Console.ReadLine();
-            TimeSpan timeEnd;
             while (!TimeSpan.TryParse(endTimeString, out timeEnd))
             {
                 Console.WriteLine("Invalid time format.");
