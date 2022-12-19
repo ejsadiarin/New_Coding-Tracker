@@ -100,6 +100,7 @@ namespace New_Coding_Tracker
                 using (var cmd = connection.CreateCommand())
                 {
                     cmd.CommandText = "SELECT * FROM codingtracker";
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
