@@ -11,11 +11,18 @@ namespace New_Coding_Tracker
     {
         internal TimeSpan timeStart;
         internal TimeSpan timeEnd;
+        internal DateTime date;
 
         public DateTime GetDateInput()
         {
-            string dateString = Console.ReadLine();
-            DateTime date = DateTime.ParseExact(dateString, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+            Console.WriteLine("Format: MM/dd/yyyy");
+            string? dateString = Console.ReadLine();
+            while (DateTime.TryParseExact(dateString, "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+            {
+                Console.WriteLine("Invalid date format.");
+                dateString= Console.ReadLine();
+            }
+
             return date;
         }
 
