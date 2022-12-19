@@ -25,6 +25,8 @@ namespace New_Coding_Tracker
                     @"CREATE TABLE IF NOT EXISTS codingtracker (
                         Id INTEGER PRIMARY KEY AUTOINCREMENT, 
                         Date TEXT,
+                        StartTime TEXT,
+                        EndTime TEXT,
                         Duration TEXT
                     )";
 
@@ -35,14 +37,15 @@ namespace New_Coding_Tracker
         }
 
         // Insert Table
-        public static void InsertTable(string duration, string startTime, string endTime)
+        public static void InsertTable(string date, string startTime, string endTime, string duration)
         {
             using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = "INSERT INTO codingtracker (StartTime, EndTime, Duration) VALUES (@startTime, @endTime, @duration)";
+                    cmd.CommandText = "INSERT INTO codingtracker (Date, StartTime, EndTime, Duration) VALUES (@date, @startTime, @endTime, @duration)";
+                    cmd.Parameters.AddWithValue("@date", date);
                     cmd.Parameters.AddWithValue("@startTime", startTime);
                     cmd.Parameters.AddWithValue("@endTime", endTime);
                     cmd.Parameters.AddWithValue("@duration", duration);

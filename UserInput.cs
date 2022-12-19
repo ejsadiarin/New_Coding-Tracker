@@ -23,7 +23,7 @@ namespace New_Coding_Tracker
         {
             // Format is: Hours:Minutes:Seconds so 00:00:00
             string startTimeString = Console.ReadLine();
-            while (!TimeSpan.TryParse(startTimeString, out timeStart))
+            while (!TimeSpan.TryParseExact(startTimeString,"hh\\:mm", CultureInfo.InvariantCulture, out timeStart))
             {
                 Console.WriteLine("Invalid time format.");
                 startTimeString = Console.ReadLine();
@@ -34,7 +34,7 @@ namespace New_Coding_Tracker
         public TimeSpan GetEndTime()
         {
             string endTimeString = Console.ReadLine();
-            while (!TimeSpan.TryParse(endTimeString, out timeEnd))
+            while (!TimeSpan.TryParseExact(endTimeString, "hh\\:mm", CultureInfo.InvariantCulture, out timeEnd))
             {
                 Console.WriteLine("Invalid time format.");
                 endTimeString = Console.ReadLine();

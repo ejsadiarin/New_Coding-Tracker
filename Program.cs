@@ -8,8 +8,13 @@ namespace New_Coding_Tracker
         static void Main(string[] args)
         {
             // instantiate classes
-            
+            Model model = new Model();
+
             // add the methods here
+            model.MainMenu();
+
+
+
         }
     }
 }

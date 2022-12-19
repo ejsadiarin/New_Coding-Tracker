@@ -26,21 +26,25 @@ namespace New_Coding_Tracker
                 Console.WriteLine("Enter Q - to quit/close application");
 
                 string userInput = Console.ReadLine();
+                Controller controller = new Controller();
 
                 switch (userInput.ToUpper())
                 {
                     case "A":
                         Console.WriteLine("You selected to add a record.\n");
-                        // add method from Controller class, that uses DatabaseAccess class
+                        controller.AddRecord();
                         break;
                     case "V":
                         Console.WriteLine("Here are your current records:\n");
+                        controller.ViewRecord();
                         break;
                     case "U":
                         Console.WriteLine("Choose the ID of the record you want to update.\n");
+                        controller.UpdateRecord();
                         break;
                     case "D":
                         Console.WriteLine("What ID of the record you want to delete.\n ");
+                        controller.DeleteRecord();
                         break;
                     case "Q":
                         notRunning = true;

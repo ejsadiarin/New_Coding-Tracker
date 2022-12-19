@@ -13,6 +13,18 @@ namespace New_Coding_Tracker
         {
 
         }
+        public void ViewRecord()
+        {
+
+        }
+        public void UpdateRecord()
+        {
+
+        }
+        public void DeleteRecord()
+        {
+
+        }
 
 
 
