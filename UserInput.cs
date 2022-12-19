@@ -9,14 +9,14 @@ namespace New_Coding_Tracker
 {
     public class UserInput
     {
-        public void GetDateInput()
+        public DateTime GetDateInput()
         {
             string dateString = Console.ReadLine();
             DateTime date = DateTime.ParseExact(dateString, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-
+            return date;
         }
 
-        public void GetStartTime()
+        public TimeSpan GetStartTime()
         {
             // Format is: Hours:Minutes:Seconds so 00:00:00
             string startTimeString = Console.ReadLine();
@@ -26,9 +26,10 @@ namespace New_Coding_Tracker
                 Console.WriteLine("Invalid time format.");
                 startTimeString = Console.ReadLine();
             }
+            return timeStart;
 
         }
-        public void GetEndTime()
+        public TimeSpan GetEndTime()
         {
             string endTimeString = Console.ReadLine();
             TimeSpan timeEnd;
@@ -37,6 +38,7 @@ namespace New_Coding_Tracker
                 Console.WriteLine("Invalid time format.");
                 endTimeString = Console.ReadLine();
             }
+            return timeEnd;
         }
         
 

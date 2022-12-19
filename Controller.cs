@@ -9,10 +9,19 @@ namespace New_Coding_Tracker
     public class Controller
     {
         // CRUD CONTROLLER, using methods from UserInput and DatabaseAccess class
-        public 
+        public void AddRecord()
+        {
+
+        }
 
 
 
         // Calculate duration method here
+        public void CalculateDuration()
+        {
+
+        }
+    
+    
     }
 }
