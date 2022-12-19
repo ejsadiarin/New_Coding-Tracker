@@ -16,7 +16,7 @@ namespace New_Coding_Tracker
 
         }
 
-        public string GetStartTime()
+        public void GetStartTime()
         {
             // Format is: Hours:Minutes:Seconds so 00:00:00
             string startTimeString = Console.ReadLine();
@@ -28,10 +28,15 @@ namespace New_Coding_Tracker
             }
 
         }
-        public string GetEndTime()
+        public void GetEndTime()
         {
-            string endTime = Console.ReadLine();
-
+            string endTimeString = Console.ReadLine();
+            TimeSpan timeEnd;
+            while (!TimeSpan.TryParse(endTimeString, out timeEnd))
+            {
+                Console.WriteLine("Invalid time format.");
+                endTimeString = Console.ReadLine();
+            }
         }
         
 
