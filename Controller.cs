@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace New_Coding_Tracker
 {
-    internal class Controller
+    public class Controller
     {
         // CRUD CONTROLLER, using methods from UserInput and DatabaseAccess class
+        public 
+
+
 
         // Calculate duration method here
     }

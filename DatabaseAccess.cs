@@ -61,7 +61,7 @@ namespace New_Coding_Tracker
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = "UPDATE codingtracker "; // THIS
+                    cmd.CommandText = "UPDATE codingtracker SET StartTime = @startTime, EndTime = @endTime, Duration = @duration WHERE Id = @id "; // THIS
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.Parameters.AddWithValue("@startTime", startTime);
                     cmd.Parameters.AddWithValue("@endTime", endTime);
@@ -75,15 +75,33 @@ namespace New_Coding_Tracker
 
 
         // Delete Table
-        public static void DeleteTable()
+        public static void DeleteTable(int id)
         {
+            using (var connection = new SqliteConnection(connectionString)) 
+            {
+                connection.Open();
+                using (var cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM codingtracker WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Prepare();
 
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         // View Table
         public static void ViewTable()
         {
-
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                using (var cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT * FROM codingtracker";
+                }
+            }
         }
 
 
