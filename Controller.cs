@@ -39,8 +39,8 @@ namespace New_Coding_Tracker
 
 
 
-        // Calculate duration method here
-        public TimeSpan CalculateDuration(CodingSession t)
+        // Calculate duration method here REFACTOR!!!!!!!!!!!!!!!!!!!!!!!!
+        public CodingSession CalculateDuration(CodingSession t)
         {
             UserInput userInput = new UserInput();
             Validation validation = new Validation();
