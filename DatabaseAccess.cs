@@ -58,7 +58,7 @@ namespace New_Coding_Tracker
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = $"UPDATE codingtracker SET Date = '{codingSession.Date}', StartTime = '{codingSession.StartTime}', EndTime = '{codingSession.EndTime}' WHERE Id = {codingSession.Id}"; 
+                    cmd.CommandText = $"UPDATE codingtracker SET Date = '{codingSession.Date}', StartTime = '{codingSession.StartTime}', EndTime = '{codingSession.EndTime}' WHERE Id = '{codingSession.Id}'"; 
 
                     cmd.ExecuteNonQuery();
                 }

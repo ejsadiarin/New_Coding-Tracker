@@ -10,7 +10,7 @@ namespace New_Coding_Tracker
     {
 
         // validate endTime should be more than startTime
-        public void ValidateTime(TimeSpan checkStart, TimeSpan checkEnd)
+        public void ValidateTime(DateTime checkStart, DateTime checkEnd)
         {
             if (checkEnd < checkStart)
             {

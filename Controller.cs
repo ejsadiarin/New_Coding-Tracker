@@ -117,7 +117,7 @@ namespace New_Coding_Tracker
             dbAccess.UpdateTable(codingSession);
             model.MainMenu();
             // call CalculateDuration method here
-
+            CalculateDuration(codingSession.StartTime, codingSession.EndTime);
         }
         public void DeleteRecord()
         {
@@ -142,12 +142,12 @@ namespace New_Coding_Tracker
             // Parse arguments to TimeSpan
             string start = startTime;
             string end = endTime;
-
-            TimeSpan startTs = TimeSpan.Parse(start);
-            TimeSpan endTs = TimeSpan.Parse(end);
+            
+            DateTime startTs = DateTime.Parse(start);
+            DateTime endTs = DateTime.Parse(end);
 
             // Parse duration TimeSpan (to subtract end - start) to string again for return value
-            TimeSpan durationTimeSpan = endTs - startTs;
+            TimeSpan durationTimeSpan = endTs.TimeOfDay - startTs.TimeOfDay;
             string duration = durationTimeSpan.ToString();
 
             // Validate
