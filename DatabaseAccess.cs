@@ -63,7 +63,7 @@ namespace New_Coding_Tracker
                     cmd.ExecuteNonQuery();
                 }
             }
-            Console.WriteLine($"Record Id: {codingSession.Id} was updated successfully.");
+            Console.WriteLine($"Changes in Record Id: {codingSession.Id} was updated successfully.");
         }
 
 

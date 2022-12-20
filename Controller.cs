@@ -48,16 +48,69 @@ namespace New_Coding_Tracker
         {
             Console.Clear();
             ViewRecord();
-            Console.WriteLine("Select the Id of the record you want to update");
-            // call UpdateMenu()
-            // instantiate CodingSession codingSession
-            // switch cases
-                // ex. Update Date:
-                // DateTime newDate = GetDateInput();
-                // Parse newDate to string
-                // codingSession.Date = newDate;
+            Console.WriteLine("\nSelect the Id of the record you want to update");
+            string idString = Console.ReadLine();
+            int id = Convert.ToInt32(idString);
+            // add Id validation here -> if Id exists
+
+            // instantiate CodingSession and UserInput
+            CodingSession codingSession = new CodingSession();
+            Model model = new Model();
+            UserInput userInput = new UserInput();
+
+            // create while loop for continous updating process until updateProcess evaluates to false
+            bool updateProcess = true;
+
+            while (updateProcess)
+            {
+                // call UpdateMenu()
+                model.UpdateMenu();
+                string choiceString = Console.ReadLine();
+                int choice = Convert.ToInt32(choiceString);
+
+                // switch cases w/ .ToUpper()
+                switch (choice)
+                {
+                    // update date
+                    case 1:
+                        DateTime newDate = userInput.GetDateInput();
+                        // Parse newDate to string
+                        string dateString = newDate.ToString();
+                        // Set new value of date
+                        codingSession.Date = dateString;
+                        
+                        break;
+
+                    // update start
+                    case 2:
+                        
+                        break;
+
+                    // update end
+            
+                    case 3:
+                        break;
+
+                    // save changes
+                    case 4:
+                        updateProcess = false;
+                        break;
+
+                    // go back to main menu
+                    case 0:
+                        model.MainMenu();
+                        updateProcess = false;
+                        break;
+                    // if not in choices
+                    default:
+                        Console.WriteLine("Invalid option.");
+                        choiceString = Console.ReadLine();
+                        break;
+                }
+            }
+            dbAccess.UpdateTable(codingSession);
+            model.MainMenu();
             // call CalculateDuration method here
-            // call UpdateTable(codingSession)
 
         }
         public void DeleteRecord()

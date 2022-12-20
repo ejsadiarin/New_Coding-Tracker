@@ -36,6 +36,8 @@ namespace New_Coding_Tracker
 
         }
 
+        // check if input string isNullOrEmpty
+
 
 
 
