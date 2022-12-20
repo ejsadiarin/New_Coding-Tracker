@@ -37,20 +37,14 @@ namespace New_Coding_Tracker
         }
 
         // Insert Table
-        public void InsertTable(CodingSession date, CodingSession startTime, CodingSession endTime, CodingSession duration)
+        public void InsertTable(CodingSession codingtracker)
         {
             using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = "INSERT INTO codingtracker (Date, StartTime, EndTime, Duration) VALUES (@date, @startTime, @endTime, @duration)";
-                    cmd.Parameters.AddWithValue("@date", date);
-                    cmd.Parameters.AddWithValue("@startTime", startTime);
-                    cmd.Parameters.AddWithValue("@endTime", endTime);
-                    cmd.Parameters.AddWithValue("@duration", duration);
-                    cmd.Prepare();
-
+                    cmd.CommandText = $"INSERT INTO codingtracker (Date, StartTime, EndTime, Duration) VALUES ('{codingtracker.Date}', '{codingtracker.StartTime}', '{codingtracker.EndTime}', '{codingtracker.Duration}')";
                     cmd.ExecuteNonQuery();
                 }
             }

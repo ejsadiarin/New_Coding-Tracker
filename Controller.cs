@@ -9,23 +9,38 @@ namespace New_Coding_Tracker
     public class Controller
     {
         public static List<CodingSession> table = new List<CodingSession>();
+        DatabaseAccess dbAccess = new DatabaseAccess();
+        UserInput getInput = new UserInput();
 
         // CRUD CONTROLLER, using methods from UserInput and DatabaseAccess class
         public void AddRecord()
         {
-            var date = table[1];
-            var startTime = table[2];
-            var endTime = table[3];
+            var date = getInput.GetDateInput();
+            var start = getInput.GetTime();
+            var end = getInput.GetTime();
 
-            // call CalculateDuration method here
-            var duration = CalculateDuration(table[4]);
+            CodingSession codingSession = new CodingSession();
 
-            DatabaseAccess dbAccess = new DatabaseAccess();
-            dbAccess.InsertTable(date, startTime, endTime, duration);
+            // Parse DateTime to string
+            string? dateString = date.ToString("MM-dd-yyyy");
+            string? startString = start.ToString("HH:mm");
+            string? endString = end.ToString("HH:mm");
+
+            // Put in CodingSession
+            codingSession.Date = dateString;
+            codingSession.StartTime = startString;
+            codingSession.EndTime = endString;
+            // get duration by using CalculateDuration method, that calculates total session time ex. end - start
+            // codingSession.Duration = CalculateDuration();
+
+            // Add new values to database
+            dbAccess.InsertTable(codingSession);
+            
         }
         public void ViewRecord()
         {
-
+            Console.Clear();
+            dbAccess.ViewTable();
         }
         public void UpdateRecord()
         {
@@ -39,7 +54,7 @@ namespace New_Coding_Tracker
 
 
 
-        // Calculate duration method here REFACTOR!!!!!!!!!!!!!!!!!!!!!!!!
+      /*  // Calculate duration method here REFACTOR!!!!!!!!!!!!!!!!!!!!!!!!
         public DateTime CalculateDuration(CodingSession t)
         {
             UserInput userInput = new UserInput();
@@ -58,7 +73,7 @@ namespace New_Coding_Tracker
             validation.isDurationNegative(duration);
             
             return duration;
-        }
+        }*/
     
     
     }
