@@ -51,28 +51,24 @@ namespace New_Coding_Tracker
         }
 
         // Update Table
-        public void UpdateTable(CodingSession id, CodingSession startTime, CodingSession endTime, CodingSession duration)
+        public void UpdateTable(CodingSession codingtracker)
         {
             using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = "UPDATE codingtracker SET StartTime = @startTime, EndTime = @endTime, Duration = @duration WHERE Id = @id "; // THIS
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.Parameters.AddWithValue("@startTime", startTime);
-                    cmd.Parameters.AddWithValue("@endTime", endTime);
-                    cmd.Parameters.AddWithValue("@duration", duration);
-                    cmd.Prepare();
+                    cmd.CommandText = $"UPDATE codingtracker SET Date = '{codingtracker.Date}', StartTime = '{codingtracker.StartTime}', EndTime = '{codingtracker.EndTime}' WHERE Id = {codingtracker.Id}"; 
 
                     cmd.ExecuteNonQuery();
                 }
             }
+            Console.WriteLine($"Record Id: {codingtracker.Id} was updated successfully.");
         }
 
 
         // Delete Table
-        public void DeleteTable(CodingSession id)
+        public void DeleteTable(int id)
         {
             using (var connection = new SqliteConnection(connectionString)) 
             {
@@ -89,7 +85,7 @@ namespace New_Coding_Tracker
         }
 
         // View Table
-        public void ViewTable()
+        public List<CodingSession> ViewTable()
         {
             List<CodingSession> tableData = new List<CodingSession>();
             using (var connection = new SqliteConnection(connectionString))
@@ -121,6 +117,10 @@ namespace New_Coding_Tracker
                     }
                 }
             }
+            TableVisualizationEngine.ShowTableVisualization(tableData);
+
+            return tableData;
+
         }
 
 
