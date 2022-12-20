@@ -24,17 +24,25 @@ namespace New_Coding_Tracker
             return date;
         }
 
+        internal DateTime time;
         public DateTime GetTime()
         {
             // Format is: Hours:Minutes:Seconds so 00:00:00
-            string time = Console.ReadLine();
+            string? timeString = Console.ReadLine();
 
-            while (!DateTime.ParseExact(time, "HH:mm", CultureInfo.InvariantCulture);
+            try
             {
-                Console.WriteLine("Invalid time format.");
-                time = Console.ReadLine();
+                time = DateTime.ParseExact(timeString, "HH:mm", CultureInfo.InvariantCulture);
+
             }
-            return timeStart;
+            catch (FormatException)
+            {
+
+                Console.WriteLine("Invalid time format.");
+                timeString = Console.ReadLine();
+            }
+
+            return time;
 
         }
 
