@@ -9,8 +9,6 @@ namespace New_Coding_Tracker
 {
     public class UserInput
     {
-        internal TimeSpan timeStart;
-        internal TimeSpan timeEnd;
         internal DateTime date;
 
         public DateTime GetDateInput()
@@ -26,31 +24,19 @@ namespace New_Coding_Tracker
             return date;
         }
 
-        public TimeSpan GetStartTime()
+        public DateTime GetTime()
         {
             // Format is: Hours:Minutes:Seconds so 00:00:00
-            string startTimeString = Console.ReadLine();
+            string time = Console.ReadLine();
 
-            while (!TimeSpan.TryParseExact(startTimeString,"hh\\:mm", CultureInfo.InvariantCulture, out timeStart))
+            while (!DateTime.ParseExact(time, "HH:mm", CultureInfo.InvariantCulture);
             {
                 Console.WriteLine("Invalid time format.");
-                startTimeString = Console.ReadLine();
+                time = Console.ReadLine();
             }
             return timeStart;
 
         }
-        public TimeSpan GetEndTime()
-        {
-            string endTimeString = Console.ReadLine();
-
-            while (!TimeSpan.TryParseExact(endTimeString, "hh\\:mm", CultureInfo.InvariantCulture, out timeEnd))
-            {
-                Console.WriteLine("Invalid time format.");
-                endTimeString = Console.ReadLine();
-            }
-            return timeEnd;
-        }
-        
 
 
     }
