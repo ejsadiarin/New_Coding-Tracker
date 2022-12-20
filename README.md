@@ -1,6 +1,6 @@
-### New_Coding-Tracker
+# New_Coding-Tracker
 
-# Takeaways
+## Takeaways
 - Plan before you code
 - Always test build or run the code after finishing a feature
 - Simple is best
