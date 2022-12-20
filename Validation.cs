@@ -8,9 +8,6 @@ namespace New_Coding_Tracker
 {
     internal class Validation
     {
-        internal static UserInput userInput = new UserInput();
-        internal TimeSpan start = userInput.timeStart;
-        internal TimeSpan end = userInput.timeEnd;
 
         // validate endTime should be more than startTime
         public void ValidateTime()

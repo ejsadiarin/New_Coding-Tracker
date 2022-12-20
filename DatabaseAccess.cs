@@ -97,13 +97,30 @@ namespace New_Coding_Tracker
         // View Table
         public void ViewTable()
         {
+            List<CodingSession> tableData = new List<CodingSession>();
             using (var connection = new SqliteConnection(connectionString))
             {
-                connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
+                    connection.Open();
                     cmd.CommandText = "SELECT * FROM codingtracker";
-                    cmd.ExecuteNonQuery();
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                tableData.Add(
+                                    new CodingSession
+                                    {
+                                        Id = reader.GetInt32(0),
+                                        Date = reader.GetString(1),
+                                        Duration = reader.GetString(2)
+                                    });
+                            }
+                        }
+                    }
                 }
             }
         }

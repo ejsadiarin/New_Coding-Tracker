@@ -40,17 +40,23 @@ namespace New_Coding_Tracker
 
 
         // Calculate duration method here REFACTOR!!!!!!!!!!!!!!!!!!!!!!!!
-        public TimeSpan CalculateDuration(CodingSession t)
+        public DateTime CalculateDuration(CodingSession t)
         {
             UserInput userInput = new UserInput();
             Validation validation = new Validation();
 
-            TimeSpan start = userInput.timeStart;
-            TimeSpan end = userInput.timeEnd;
-            validation.ValidateTime();
-            TimeSpan duration = end - start;
-            validation.isDurationNegative(duration);
+            DateTime start = userInput.GetTime();
+            DateTime end = userInput.GetTime();
 
+            if (end < start)
+            {
+                Console.WriteLine("End time must be later than start time.");
+                return;
+            }
+
+            DateTime duration = end - start;
+            validation.isDurationNegative(duration);
+            
             return duration;
         }
     
