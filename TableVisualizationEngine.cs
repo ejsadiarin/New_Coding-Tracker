@@ -10,11 +10,13 @@ namespace New_Coding_Tracker
 {
     internal class TableVisualizationEngine
     {
-        public void CreateTableVisualization()
+        public static void ShowTableVisualization<T>(List<T> tableData) where T : class
         {
             ConsoleTableBuilder
-                .From(Controller.table)
+                .From(tableData)
+                .WithTitle("CodingSession")
                 .ExportAndWriteLine();
+            Console.WriteLine("\n\n");
         }
     }
 }

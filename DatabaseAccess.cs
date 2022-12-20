@@ -120,6 +120,10 @@ namespace New_Coding_Tracker
                                     });
                             }
                         }
+                        else
+                        {
+                            Console.WriteLine("No rows found.\n");
+                        }
                     }
                 }
             }
