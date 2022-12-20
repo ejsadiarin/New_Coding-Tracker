@@ -37,33 +37,33 @@ namespace New_Coding_Tracker
         }
 
         // Insert Table
-        public void InsertTable(CodingSession codingtracker)
+        public void InsertTable(CodingSession codingSession)
         {
             using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = $"INSERT INTO codingtracker (Date, StartTime, EndTime, Duration) VALUES ('{codingtracker.Date}', '{codingtracker.StartTime}', '{codingtracker.EndTime}', '{codingtracker.Duration}')";
+                    cmd.CommandText = $"INSERT INTO codingtracker (Date, StartTime, EndTime, Duration) VALUES ('{codingSession.Date}', '{codingSession.StartTime}', '{codingSession.EndTime}', '{codingSession.Duration}')";
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
         // Update Table
-        public void UpdateTable(CodingSession codingtracker)
+        public void UpdateTable(CodingSession codingSession)
         {
             using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = $"UPDATE codingtracker SET Date = '{codingtracker.Date}', StartTime = '{codingtracker.StartTime}', EndTime = '{codingtracker.EndTime}' WHERE Id = {codingtracker.Id}"; 
+                    cmd.CommandText = $"UPDATE codingtracker SET Date = '{codingSession.Date}', StartTime = '{codingSession.StartTime}', EndTime = '{codingSession.EndTime}' WHERE Id = {codingSession.Id}"; 
 
                     cmd.ExecuteNonQuery();
                 }
             }
-            Console.WriteLine($"Record Id: {codingtracker.Id} was updated successfully.");
+            Console.WriteLine($"Record Id: {codingSession.Id} was updated successfully.");
         }
 
 

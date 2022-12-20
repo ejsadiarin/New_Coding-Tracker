@@ -47,14 +47,24 @@ namespace New_Coding_Tracker
         public void UpdateRecord()
         {
             Console.Clear();
+            ViewRecord();
             Console.WriteLine("Select the Id of the record you want to update");
+            // call UpdateMenu()
+            // instantiate CodingSession codingSession
+            // switch cases
+                // ex. Update Date:
+                // DateTime newDate = GetDateInput();
+                // Parse newDate to string
+                // codingSession.Date = newDate;
             // call CalculateDuration method here
+            // call UpdateTable(codingSession)
 
         }
         public void DeleteRecord()
         {
             Console.Clear();
-            Console.WriteLine("Select the Id of the record you want to delete");
+            ViewRecord();
+            Console.WriteLine("\nSelect the Id of the record you want to delete");
             string idString = Console.ReadLine();
             int id = Convert.ToInt32(idString);
             // add Validation if Id not exists, then "The record of id doesn't exist"
