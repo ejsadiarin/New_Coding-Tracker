@@ -101,6 +101,7 @@ namespace New_Coding_Tracker
                         {
                             while (reader.Read())
                             {
+                                // Add to the tableData List, that references to CodingSession class' necessary properties
                                 tableData.Add(
                                     new CodingSession
                                     {

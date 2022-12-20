@@ -37,7 +37,7 @@ namespace New_Coding_Tracker
 
             // Add new values to database
             dbAccess.InsertTable(codingSession);
-            Console.WriteLine("Your new record has been added successfully!");
+            Console.WriteLine("Your new record has been added successfully!\n\n");
         }
         public void ViewRecord()
         {
@@ -55,11 +55,16 @@ namespace New_Coding_Tracker
         {
             Console.Clear();
             Console.WriteLine("Select the Id of the record you want to delete");
+            string idString = Console.ReadLine();
+            int id = Convert.ToInt32(idString);
+            // add Validation if Id not exists, then "The record of id doesn't exist"
+            dbAccess.DeleteTable(id);
+
         }
 
 
 
-        // Calculate duration method here REFACTOR!!!!!!!!!!!!!!!!!!!!!!!!
+        // Calculate duration method here
         public string CalculateDuration(string startTime, string endTime)
         {
             UserInput userInput = new UserInput();

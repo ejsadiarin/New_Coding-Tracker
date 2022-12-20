@@ -64,6 +64,10 @@ namespace New_Coding_Tracker
 
         }
 
+        public void UpdateMenu()
+        {
+            Console.WriteLine("")
+        }
      
 
     }
