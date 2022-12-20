@@ -11,10 +11,10 @@ namespace New_Coding_Tracker
         // used to interact with database and has business logic
 
        public void MainMenu() 
-        {
-            bool notRunning = true;
+       {
+            bool closeApp = false;
 
-            while (!notRunning) 
+            while (closeApp == false)
             {
                 Console.WriteLine("MAIN MENU\n");
                 Console.WriteLine("Welcome to your Coding Tracker!\n");
@@ -28,6 +28,13 @@ namespace New_Coding_Tracker
 
                 string userInput = Console.ReadLine();
                 Controller controller = new Controller();
+
+                // Validate
+                while (string.IsNullOrEmpty(userInput))
+                {
+                    Console.WriteLine("\nInvalid Command. Please type a number from 0 to 4.\n");
+                    userInput = Console.ReadLine();
+                }
 
                 switch (userInput.ToUpper())
                 {
@@ -48,7 +55,7 @@ namespace New_Coding_Tracker
                         controller.DeleteRecord();
                         break;
                     case "Q":
-                        notRunning = true;
+                        closeApp = true;
                         break;
 
                 }

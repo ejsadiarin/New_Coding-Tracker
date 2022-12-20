@@ -11,14 +11,14 @@ namespace New_Coding_Tracker
     {
         internal DateTime date;
         internal DateTime time;
-        internal Model model = new Model();
+        /*internal Model model = new Model();*/
 
         public DateTime GetDateInput()
         {
             Console.WriteLine("Enter the date (Format: MM/dd/yyyy) or enter 0 to go back to the Main Menu: \n");
             string? dateString = Console.ReadLine();
 
-            if (dateString == "0") model.MainMenu();
+            /*if (dateString == "0") model.MainMenu();*/
 
             while (DateTime.TryParseExact(dateString, "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
             {
@@ -35,7 +35,7 @@ namespace New_Coding_Tracker
             Console.WriteLine("Enter the time (Format: HH:mm) or enter 0 to go back to the Main Menu: \n");
             string? timeString = Console.ReadLine();
 
-            if (timeString == "0") model.MainMenu();
+           /* if (timeString == "0") model.MainMenu();*/
 
             try
             {

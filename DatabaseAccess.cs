@@ -14,7 +14,7 @@ namespace New_Coding_Tracker
         internal string connectionString = ConfigurationManager.AppSettings.Get("ConnectionString");
 
         // Create Table
-        public void CreateTable()
+        public void CreateTable(string connectionString)
         {
             using (var connection = new SqliteConnection(connectionString))
             {
