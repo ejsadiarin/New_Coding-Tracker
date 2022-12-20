@@ -15,7 +15,7 @@ namespace New_Coding_Tracker
 
         public DateTime GetDateInput()
         {
-            Console.WriteLine("Enter the date (Format: MM/dd/yy) or enter 0 to go back to the Main Menu: \n");
+            Console.WriteLine("\nEnter the date (Format: MM/dd/yy) or enter 0 to go back to the Main Menu:");
             string? dateString = Console.ReadLine();
 
             if (dateString == "0") model.MainMenu();
@@ -32,7 +32,7 @@ namespace New_Coding_Tracker
         public DateTime GetTime()
         {
             // Format is: Hours:Minutes:Seconds so 00:00:00
-            Console.WriteLine("Enter the time (Format: HH:mm) or enter 0 to go back to the Main Menu: \n");
+            Console.WriteLine("\nEnter the time (Format: HH:mm) or enter 0 to go back to the Main Menu:");
             string? timeString = Console.ReadLine();
 
             if (timeString == "0") model.MainMenu();

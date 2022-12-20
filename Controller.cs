@@ -16,7 +16,9 @@ namespace New_Coding_Tracker
         public void AddRecord()
         {
             var date = getInput.GetDateInput();
+            Console.WriteLine("Start Time:");
             var start = getInput.GetTime();
+            Console.WriteLine("End Time:");
             var end = getInput.GetTime();
 
             CodingSession codingSession = new CodingSession();
@@ -31,11 +33,11 @@ namespace New_Coding_Tracker
             codingSession.StartTime = startString;
             codingSession.EndTime = endString;
             // get duration by using CalculateDuration method, that calculates total session time ex. end - start
-            // codingSession.Duration = CalculateDuration();
+            codingSession.Duration = CalculateDuration(startString, endString);
 
             // Add new values to database
             dbAccess.InsertTable(codingSession);
-            
+            Console.WriteLine("Your new record has been added successfully!");
         }
         public void ViewRecord()
         {
@@ -44,37 +46,43 @@ namespace New_Coding_Tracker
         }
         public void UpdateRecord()
         {
+            Console.Clear();
+            Console.WriteLine("Select the Id of the record you want to update");
             // call CalculateDuration method here
 
         }
         public void DeleteRecord()
         {
-
+            Console.Clear();
+            Console.WriteLine("Select the Id of the record you want to delete");
         }
 
 
 
-      /*  // Calculate duration method here REFACTOR!!!!!!!!!!!!!!!!!!!!!!!!
-        public DateTime CalculateDuration(CodingSession t)
+        // Calculate duration method here REFACTOR!!!!!!!!!!!!!!!!!!!!!!!!
+        public string CalculateDuration(string startTime, string endTime)
         {
             UserInput userInput = new UserInput();
             Validation validation = new Validation();
 
-            DateTime start = userInput.GetTime();
-            DateTime end = userInput.GetTime();
+            // Parse arguments to TimeSpan
+            string start = startTime;
+            string end = endTime;
 
-            if (end < start)
-            {
-                Console.WriteLine("End time must be later than start time.");
-                return;
-            }
+            TimeSpan startTs = TimeSpan.Parse(start);
+            TimeSpan endTs = TimeSpan.Parse(end);
 
-            DateTime duration = end - start;
-            validation.isDurationNegative(duration);
-            
+            // Parse duration TimeSpan (to subtract end - start) to string again for return value
+            TimeSpan durationTimeSpan = endTs - startTs;
+            string duration = durationTimeSpan.ToString();
+
+            // Validate
+            validation.ValidateTime(startTs, endTs);
+            validation.isDurationNegative(durationTimeSpan);
+
             return duration;
-        }*/
-    
-    
+        }
+
+
     }
 }

@@ -106,7 +106,9 @@ namespace New_Coding_Tracker
                                     {
                                         Id = reader.GetInt32(0),
                                         Date = reader.GetString(1),
-                                        Duration = reader.GetString(2)
+                                        StartTime = reader.GetString(2),
+                                        EndTime = reader.GetString(3),
+                                        Duration = reader.GetString(4)
                                     });
                             }
                         }
