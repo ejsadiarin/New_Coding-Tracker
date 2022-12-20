@@ -73,22 +73,28 @@ namespace New_Coding_Tracker
                 {
                     // update date
                     case 1:
+                        Console.WriteLine("New date");
                         DateTime newDate = userInput.GetDateInput();
                         // Parse newDate to string
                         string dateString = newDate.ToString();
                         // Set new value of date
                         codingSession.Date = dateString;
-                        
                         break;
 
                     // update start
                     case 2:
-                        
+                        Console.WriteLine("New start time");
+                        DateTime newStart = userInput.GetTime();
+                        string startString = newStart.ToString();
+                        codingSession.StartTime = startString;
                         break;
 
                     // update end
-            
                     case 3:
+                        Console.WriteLine("New end time");
+                        DateTime newEnd = userInput.GetTime();
+                        string endString = newEnd.ToString();
+                        codingSession.EndTime = endString;
                         break;
 
                     // save changes
