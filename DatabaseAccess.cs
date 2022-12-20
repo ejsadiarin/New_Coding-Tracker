@@ -11,7 +11,7 @@ namespace New_Coding_Tracker
 {
     public class DatabaseAccess
     {
-        internal string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        internal string connectionString = ConfigurationManager.AppSettings.Get("ConnectionString");
 
         // Create Table
         public void CreateTable()

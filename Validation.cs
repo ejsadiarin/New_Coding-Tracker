@@ -10,14 +10,14 @@ namespace New_Coding_Tracker
     {
 
         // validate endTime should be more than startTime
-        public void ValidateTime()
+     /*   public void ValidateTime()
         {
             if (end < start)
             {
                 Console.WriteLine("End time must be later than start time.");
                 return;
             }
-        }
+        }*/
 
         // check if duration is negative
         public bool isDurationNegative(TimeSpan time)
