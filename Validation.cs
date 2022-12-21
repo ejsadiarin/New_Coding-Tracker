@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Data.Sqlite;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,15 +33,36 @@ namespace New_Coding_Tracker
         }
 
         // check if Id exist
-        public bool CheckIdExist(int id)
+        internal CodingSession GetById(int id)
         {
-            CodingSession codingSession = new CodingSession();
-            int idExist = codingSession.Id;
-            if (idExist.)
+            string connectionString = ConfigurationManager.AppSettings.Get("ConnectionString");
+            using (var connection = new SqliteConnection(connectionString))
             {
-                Console.WriteLine("Id does not exist. Choose another Id.");
+                using (var tableCmd = connection.CreateCommand())
+                {
+                    connection.Open();
+
+                    tableCmd.CommandText = $"SELECT * FROM coding Where Id = '{id}'";
+
+                    using (var reader = tableCmd.ExecuteReader())
+                    {
+                        CodingSession codingSession = new();
+                        if (reader.HasRows)
+                        {
+                            reader.Read();
+                            codingSession.Id = reader.GetInt32(0);
+                            codingSession.Date = reader.GetString(1);
+                            codingSession.StartTime = reader.GetString(2);
+                            codingSession.EndTime = reader.GetString(3);
+                            codingSession.Duration = reader.GetString(4);
+                        }
+
+                        Console.WriteLine("\n\n");
+
+                        return codingSession;
+                    };
+                }
             }
-            return idExist;
         }
 
         // check if number is entered
