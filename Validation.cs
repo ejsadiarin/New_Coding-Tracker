@@ -70,18 +70,19 @@ namespace New_Coding_Tracker
         {
             bool isNumber = true;
             int numberInput;
+            string numberString;
 
             do
             {
-                string numberString = Console.ReadLine();
+                numberString = Console.ReadLine();
                 isNumber = int.TryParse(numberString, out numberInput);
 
-                if (!isNumber || numberInput < 0)
+                if (!isNumber || numberInput < 0 || string.IsNullOrEmpty(numberString))
                 {
                     Console.WriteLine("Number does not exist.");
                     numberString = Console.ReadLine();
                 }
-            } while (!isNumber || numberInput < 0);
+            } while (!isNumber || numberInput < 0 || string.IsNullOrEmpty(numberString));
 
             return numberInput;
         }

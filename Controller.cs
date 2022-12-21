@@ -15,26 +15,21 @@ namespace New_Coding_Tracker
         // CRUD CONTROLLER, using methods from UserInput and DatabaseAccess class
         public void AddRecord()
         {
-            var date = getInput.GetDateInput();
+            string date = getInput.GetDateInput();
             Console.WriteLine("Start Time:");
-            var start = getInput.GetTime();
+            string start = getInput.GetTime();
             Console.WriteLine("End Time:");
-            var end = getInput.GetTime();
+            string end = getInput.GetTime();
 
             CodingSession codingSession = new CodingSession();
 
-            // Parse DateTime to string
-            string? dateString = date.ToString("MM-dd-yyyy");
-            string? startString = start.ToString("HH:mm");
-            string? endString = end.ToString("HH:mm");
-
             // Put in CodingSession
-            codingSession.Date = dateString;
-            codingSession.StartTime = startString;
-            codingSession.EndTime = endString;
+            codingSession.Date = date;
+            codingSession.StartTime = start;
+            codingSession.EndTime = end;
 
             // get duration by using CalculateDuration method, that calculates total session time ex. end - start
-            codingSession.Duration = CalculateDuration(startString, endString);
+            codingSession.Duration = CalculateDuration(start, end);
 
             // Add new values to database
             dbAccess.InsertTable(codingSession);
@@ -56,9 +51,6 @@ namespace New_Coding_Tracker
             UserInput userInput = new UserInput();
             
             Console.WriteLine("\nSelect the Id of the record you want to update");
-            int getId = userInput.GetRowId();
-
-
 
             // create while loop for continous updating process until updateProcess evaluates to false
             bool updateProcess = true;
@@ -76,22 +68,13 @@ namespace New_Coding_Tracker
                     // update date
                     case 1:
                         Console.WriteLine("New date");
-                        DateTime newDate = userInput.GetDateInput();
-                        // Parse newDate to string
-                        string dateString = newDate.ToString();
-                        // Set new value of date
-                        /*table[0].Date = dateString;*/
-                        dbAccess.UpdateTableDate(getId, dateString);
-                        updateProcess = false;
+                        
                         break;
 
                     // update start and end times
                     case 2:
                         Console.WriteLine("New start and end time\n");
                         
-                        List<string> timeList = CalculateDurationForUpdate();
-                        dbAccess.UpdateTableTime(getId, timeList[0], timeList[1], timeList[2]);
-                        updateProcess = false;
                         break;
 
                     // go back to main menu
@@ -149,37 +132,5 @@ namespace New_Coding_Tracker
             return duration;
         }
 
-        public List<string> CalculateDurationForUpdate()
-        {
-            List<string> timeList = new List<string>();
-            UserInput userInput = new UserInput();
-            Validation validation = new Validation();
-
-            DateTime newStart, newEnd;
-            TimeSpan durationTimeSpan;
-            bool isNegative;
-            string startString, endString, duration;
-
-            do
-            {
-                newStart = userInput.GetTime();
-                newEnd = userInput.GetTime();
-
-                durationTimeSpan = newEnd - newStart;
-
-                // Parse all to string
-                duration = durationTimeSpan.ToString();
-                startString = newStart.ToString();
-                endString = newEnd.ToString();
-
-                isNegative = validation.isDurationNegative(durationTimeSpan);
-            }
-            while (!isNegative);
-
-            timeList.Add(startString);
-            timeList.Add(endString);
-            timeList.Add(duration);
-            return timeList;
-        }
     }
 }
