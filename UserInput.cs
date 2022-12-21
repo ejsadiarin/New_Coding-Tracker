@@ -49,12 +49,16 @@ namespace New_Coding_Tracker
 
         public int GetRowId()
         {
+            Validation validation = new Validation();
             bool checkId = true;
             int id;
             do
             {
-                id = Validation.
-            }
+                id = validation.isNumberEntered();
+                checkId = validation.CheckIdExist(id);
+            } while (!checkId);
+
+            return id;
         }
 
 
