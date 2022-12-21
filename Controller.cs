@@ -32,6 +32,7 @@ namespace New_Coding_Tracker
             codingSession.Date = dateString;
             codingSession.StartTime = startString;
             codingSession.EndTime = endString;
+
             // get duration by using CalculateDuration method, that calculates total session time ex. end - start
             codingSession.Duration = CalculateDuration(startString, endString);
 
@@ -56,6 +57,7 @@ namespace New_Coding_Tracker
             
             Console.WriteLine("\nSelect the Id of the record you want to update");
             int getId = userInput.GetRowId();
+
 
 
             // create while loop for continous updating process until updateProcess evaluates to false

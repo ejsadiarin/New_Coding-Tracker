@@ -33,9 +33,9 @@ namespace New_Coding_Tracker
         // check if Id exist
         public bool CheckIdExist(int id)
         {
-            Controller controller = new Controller();
-            bool idExist = controller.table.Any(x => x.Id == id);
-            if (!idExist)
+            CodingSession codingSession = new CodingSession();
+            int idExist = codingSession.Id;
+            if (idExist.)
             {
                 Console.WriteLine("Id does not exist. Choose another Id.");
             }

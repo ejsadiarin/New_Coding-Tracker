@@ -51,7 +51,7 @@ namespace New_Coding_Tracker
         }
 
         // Update Table
-        public void UpdateTableDate(int id, string date)
+        public void UpdateTableDate(CodingSession codingSession, int id, string date)
         {
             using (var connection = new SqliteConnection(connectionString))
             {
