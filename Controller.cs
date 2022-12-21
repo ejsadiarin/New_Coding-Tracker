@@ -48,15 +48,15 @@ namespace New_Coding_Tracker
         {
             Console.Clear();
             ViewRecord();
-            Console.WriteLine("\nSelect the Id of the record you want to update");
-            string idString = Console.ReadLine();
-            int id = Convert.ToInt32(idString);
-            // add Id validation here -> if Id exists
 
             // instantiate CodingSession and UserInput
             CodingSession codingSession = new CodingSession();
             Model model = new Model();
             UserInput userInput = new UserInput();
+            
+            Console.WriteLine("\nSelect the Id of the record you want to update");
+            int getId = userInput.GetRowId();
+
 
             // create while loop for continous updating process until updateProcess evaluates to false
             bool updateProcess = true;
@@ -78,17 +78,17 @@ namespace New_Coding_Tracker
                         // Parse newDate to string
                         string dateString = newDate.ToString();
                         // Set new value of date
-                        codingSession.Date = dateString;
+                        /*table[0].Date = dateString;*/
+                        dbAccess.UpdateTableDate(getId, dateString);
+                        updateProcess = false;
                         break;
 
-                    // update start
+                    // update start and end times
                     case 2:
-                        Console.WriteLine("New start and end time");
-                        CalculateDurationForUpdate();
-                        break;
-
-                    // save changes
-                    case 3:
+                        Console.WriteLine("New start and end time\n");
+                        
+                        List<string> timeList = CalculateDurationForUpdate();
+                        dbAccess.UpdateTableTime(getId, timeList[0], timeList[1], timeList[2]);
                         updateProcess = false;
                         break;
 
@@ -104,7 +104,8 @@ namespace New_Coding_Tracker
                         break;
                 }
             }
-            dbAccess.UpdateTable(codingSession);
+            Console.Clear();
+            Console.WriteLine("Changes was updated successfully.");
             model.MainMenu();
 
         }

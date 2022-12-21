@@ -51,7 +51,23 @@ namespace New_Coding_Tracker
         }
 
         // Update Table
-        public void UpdateTable(int id, string startTime, string endTime, string duration)
+        public void UpdateTableDate(int id, string date)
+        {
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                using (var cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText = $"UPDATE codingtracker SET Date = @date WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@date", date);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Prepare();
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+        public void UpdateTableTime(int id, string startTime, string endTime, string duration)
         {
             using (var connection = new SqliteConnection(connectionString))
             {
@@ -64,9 +80,10 @@ namespace New_Coding_Tracker
                     cmd.Parameters.AddWithValue("@duration", duration);
                     cmd.Parameters.AddWithValue("@id", id);
                     cmd.Prepare();
+
+                    cmd.ExecuteNonQuery();
                 }
             }
-            Console.WriteLine($"Changes in Record Id: {id} was updated successfully.");
         }
 
 

@@ -52,6 +52,7 @@ namespace New_Coding_Tracker
             Validation validation = new Validation();
             bool checkId = true;
             int id;
+
             do
             {
                 id = validation.isNumberEntered();
