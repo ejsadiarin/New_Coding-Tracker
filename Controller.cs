@@ -83,22 +83,12 @@ namespace New_Coding_Tracker
 
                     // update start
                     case 2:
-                        Console.WriteLine("New start time");
-                        DateTime newStart = userInput.GetTime();
-                        string startString = newStart.ToString();
-                        codingSession.StartTime = startString;
-                        break;
-
-                    // update end
-                    case 3:
-                        Console.WriteLine("New end time");
-                        DateTime newEnd = userInput.GetTime();
-                        string endString = newEnd.ToString();
-                        codingSession.EndTime = endString;
+                        Console.WriteLine("New start and end time");
+                        // call CalculateDurationForUpdate()  
                         break;
 
                     // save changes
-                    case 4:
+                    case 3:
                         updateProcess = false;
                         break;
 
@@ -114,7 +104,7 @@ namespace New_Coding_Tracker
                         break;
                 }
             }
-            codingSession.Duration = CalculateDuration(codingSession.StartTime, codingSession.EndTime);
+           /* codingSession.Duration = CalculateDuration(codingSession.StartTime, codingSession.EndTime);*/
             dbAccess.UpdateTable(codingSession);
             model.MainMenu();
 
@@ -157,6 +147,37 @@ namespace New_Coding_Tracker
             return duration;
         }
 
+        public List<string> CalculateDurationForUpdate()
+        {
+            List<string> timeList = new List<string>();
+            UserInput userInput = new UserInput();
+            Validation validation = new Validation();
 
+            DateTime newStart, newEnd;
+            TimeSpan durationTimeSpan;
+            bool isNegative;
+            string startString, endString, duration;
+
+            do
+            {
+                newStart = userInput.GetTime();
+                newEnd = userInput.GetTime();
+
+                durationTimeSpan = newEnd - newStart;
+
+                // Parse all to string
+                duration = durationTimeSpan.ToString();
+                startString = newStart.ToString();
+                endString = newEnd.ToString();
+
+                isNegative = validation.isDurationNegative(durationTimeSpan);
+            }
+            while (!isNegative);
+
+            timeList.Add(startString);
+            timeList.Add(endString);
+            timeList.Add(duration);
+            return timeList;
+        }
     }
 }

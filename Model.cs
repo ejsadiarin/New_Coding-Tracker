@@ -67,9 +67,8 @@ namespace New_Coding_Tracker
         public void UpdateMenu()
         {
             Console.WriteLine("Enter 1 - to update the date of the chosen record Id");
-            Console.WriteLine("Enter 2 - to update the start time of the chosen record Id");
-            Console.WriteLine("Enter 3 - to update the end time of the chosen record Id");
-            Console.WriteLine("Enter 4 - to save your changes");
+            Console.WriteLine("Enter 2 - to update the start and end time of the chosen record Id");
+            Console.WriteLine("Enter 3 - to save your changes");
             Console.WriteLine("Enter 0 - to go back to the main menu\n");
         }
      

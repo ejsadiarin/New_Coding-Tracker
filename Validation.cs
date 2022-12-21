@@ -20,14 +20,14 @@ namespace New_Coding_Tracker
         }
 
         // check if duration is negative
-        public void isDurationNegative(TimeSpan time)
+        public bool isDurationNegative(TimeSpan time)
         {
-            bool negativeDuration = time.Minutes < 0; 
-            if (negativeDuration)
+            bool ts = time.Minutes > 0; 
+            if (!ts)
             {
                 Console.WriteLine("Time cannot be negative.");
-                return;
             }
+                return ts;
         }
 
         // check if Id exist
