@@ -51,35 +51,19 @@ namespace New_Coding_Tracker
         }
 
         // Update Table
-        public void UpdateTableDate(CodingSession codingSession, int id, string date)
+        public void UpdateTable(CodingSession codingSession)
         {
             using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = $"UPDATE codingtracker SET Date = @date WHERE Id = @id";
-                    cmd.Parameters.AddWithValue("@date", date);
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.Prepare();
-
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-        public void UpdateTableTime(int id, string startTime, string endTime, string duration)
-        {
-            using (var connection = new SqliteConnection(connectionString))
-            {
-                connection.Open();
-                using (var cmd = connection.CreateCommand())
-                {
-                    cmd.CommandText = $"UPDATE codingtracker SET StartTime = @startTime, EndTime = @endTime, Duration = @duration WHERE Id = @id";
-                    cmd.Parameters.AddWithValue("@startTime", startTime);
-                    cmd.Parameters.AddWithValue("@endTime", endTime);
-                    cmd.Parameters.AddWithValue("@duration", duration);
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.Prepare();
+                    cmd.CommandText = $@"UPDATE codingtracker SET 
+                                            Date = {codingSession.Date}, 
+                                            StartTime = {codingSession.StartTime}, 
+                                            EndTime = {codingSession.EndTime},
+                                            Duration = {codingSession.Duration} 
+                                        WHERE Id = @id";
 
                     cmd.ExecuteNonQuery();
                 }
