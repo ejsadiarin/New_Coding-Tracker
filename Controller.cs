@@ -8,7 +8,7 @@ namespace New_Coding_Tracker
 {
     public class Controller
     {
-        public static List<CodingSession> table = new List<CodingSession>();
+        public List<CodingSession> table = new List<CodingSession>();
         DatabaseAccess dbAccess = new DatabaseAccess();
         UserInput getInput = new UserInput();
 
@@ -84,7 +84,7 @@ namespace New_Coding_Tracker
                     // update start
                     case 2:
                         Console.WriteLine("New start and end time");
-                        // call CalculateDurationForUpdate()  
+                        CalculateDurationForUpdate();
                         break;
 
                     // save changes
@@ -104,7 +104,6 @@ namespace New_Coding_Tracker
                         break;
                 }
             }
-           /* codingSession.Duration = CalculateDuration(codingSession.StartTime, codingSession.EndTime);*/
             dbAccess.UpdateTable(codingSession);
             model.MainMenu();
 

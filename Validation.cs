@@ -31,9 +31,15 @@ namespace New_Coding_Tracker
         }
 
         // check if Id exist
-        public void CheckIdExist(int id)
+        public bool CheckIdExist(int id)
         {
-
+            Controller controller = new Controller();
+            bool idExist = controller.table.Any(x => x.Id == id);
+            if (!idExist)
+            {
+                Console.WriteLine("Id does not exist. Choose another Id.");
+            }
+            return idExist;
         }
 
         // check if input string isNullOrEmpty
