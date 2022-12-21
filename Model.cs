@@ -39,18 +39,20 @@ namespace New_Coding_Tracker
                 switch (userInput.ToUpper())
                 {
                     case "A":
+                        Console.Clear();
                         Console.WriteLine("You selected to add a record.\n");
                         controller.AddRecord();
                         break;
                     case "V":
+                        Console.Clear();
                         Console.WriteLine("Here are your current records:\n");
                         controller.ViewRecord();
                         break;
                     case "U":
-                        Console.WriteLine("Choose the ID of the record you want to update.\n");
                         controller.UpdateRecord();
                         break;
                     case "D":
+                        Console.Clear();
                         Console.WriteLine("What ID of the record you want to delete.\n ");
                         controller.DeleteRecord();
                         break;
@@ -68,7 +70,6 @@ namespace New_Coding_Tracker
         {
             Console.WriteLine("Enter 1 - to update the date of the chosen record Id");
             Console.WriteLine("Enter 2 - to update the start and end time of the chosen record Id");
-            Console.WriteLine("Enter 3 - to save your changes");
             Console.WriteLine("Enter 0 - to go back to the main menu\n");
         }
      

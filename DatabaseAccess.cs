@@ -59,11 +59,13 @@ namespace New_Coding_Tracker
                 using (var cmd = connection.CreateCommand())
                 {
                     cmd.CommandText = $@"UPDATE codingtracker SET 
-                                            Date = {codingSession.Date}, 
-                                            StartTime = {codingSession.StartTime}, 
-                                            EndTime = {codingSession.EndTime},
-                                            Duration = {codingSession.Duration} 
-                                        WHERE Id = @id";
+                                            Date = '{codingSession.Date}', 
+                                            StartTime = '{codingSession.StartTime}', 
+                                            EndTime = '{codingSession.EndTime}',
+                                            Duration = '{codingSession.Duration}' 
+                                        WHERE 
+                                            Id = {codingSession.Id}
+                                        ";
 
                     cmd.ExecuteNonQuery();
                 }

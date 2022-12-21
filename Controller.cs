@@ -8,7 +8,6 @@ namespace New_Coding_Tracker
 {
     public class Controller
     {
-        public List<CodingSession> table = new List<CodingSession>();
         DatabaseAccess dbAccess = new DatabaseAccess();
         UserInput getInput = new UserInput();
 
@@ -49,8 +48,32 @@ namespace New_Coding_Tracker
             CodingSession codingSession = new CodingSession();
             Model model = new Model();
             UserInput userInput = new UserInput();
+            Validation validation = new Validation();
             
             Console.WriteLine("\nSelect the Id of the record you want to update");
+            string idInput = Console.ReadLine();
+            int idInt = int.Parse(idInput);
+            /*string idInput;
+            int idInt;
+            bool isNumber = true;
+            do 
+            {
+                idInput = Console.ReadLine();
+                isNumber = int.TryParse(idInput, out idInt);
+
+                if (!isNumber || idInt < 0 || string.IsNullOrEmpty(idInput))
+                {
+                    Console.WriteLine("Number does not exist.");
+                    idInput = Console.ReadLine();
+                }
+            } while ((!isNumber || idInt < 0 || string.IsNullOrEmpty(idInput)));*/
+            /*var chosenId = userInput.GetById(idInt);*/
+
+            while (codingSession.Id == 0)
+            {
+                Console.WriteLine($"\nRecord with id {idInput} doesn't exist\n");
+                UpdateRecord();
+            }
 
             // create while loop for continous updating process until updateProcess evaluates to false
             bool updateProcess = true;
@@ -67,14 +90,16 @@ namespace New_Coding_Tracker
                 {
                     // update date
                     case 1:
-                        Console.WriteLine("New date");
-                        
+                        Console.WriteLine("\nNew date");
+                        codingSession.Date = userInput.GetDateInput();
                         break;
 
                     // update start and end times
                     case 2:
-                        Console.WriteLine("New start and end time\n");
-                        
+                        Console.WriteLine("\nNew start and end time");
+                        codingSession.StartTime = userInput.GetTime();
+                        codingSession.EndTime = userInput.GetTime();
+                        codingSession.Duration = CalculateDuration(codingSession.StartTime, codingSession.EndTime);
                         break;
 
                     // go back to main menu
@@ -90,6 +115,7 @@ namespace New_Coding_Tracker
                 }
             }
             Console.Clear();
+            dbAccess.UpdateTable(codingSession);
             Console.WriteLine("Changes was updated successfully.");
             model.MainMenu();
 
