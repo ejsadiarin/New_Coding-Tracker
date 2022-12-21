@@ -114,10 +114,10 @@ namespace New_Coding_Tracker
                         break;
                 }
             }
+            codingSession.Duration = CalculateDuration(codingSession.StartTime, codingSession.EndTime);
             dbAccess.UpdateTable(codingSession);
             model.MainMenu();
-            // call CalculateDuration method here
-            CalculateDuration(codingSession.StartTime, codingSession.EndTime);
+
         }
         public void DeleteRecord()
         {
