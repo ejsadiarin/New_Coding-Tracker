@@ -51,19 +51,22 @@ namespace New_Coding_Tracker
         }
 
         // Update Table
-        public void UpdateTable(CodingSession codingSession)
+        public void UpdateTable(int id, string startTime, string endTime, string duration)
         {
             using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = $"UPDATE codingtracker SET Date = '{codingSession.Date}', StartTime = '{codingSession.StartTime}', EndTime = '{codingSession.EndTime}' WHERE Id = '{codingSession.Id}'"; 
-
-                    cmd.ExecuteNonQuery();
+                    cmd.CommandText = $"UPDATE codingtracker SET StartTime = @startTime, EndTime = @endTime, Duration = @duration WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@startTime", startTime);
+                    cmd.Parameters.AddWithValue("@endTime", endTime);
+                    cmd.Parameters.AddWithValue("@duration", duration);
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Prepare();
                 }
             }
-            Console.WriteLine($"Changes in Record Id: {codingSession.Id} was updated successfully.");
+            Console.WriteLine($"Changes in Record Id: {id} was updated successfully.");
         }
 
 
