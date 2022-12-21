@@ -42,7 +42,26 @@ namespace New_Coding_Tracker
             return idExist;
         }
 
-        // check if input string isNullOrEmpty
+        // check if number is entered
+        public int isNumberEntered()
+        {
+            bool isNumber = true;
+            int numberInput;
+
+            do
+            {
+                string numberString = Console.ReadLine();
+                isNumber = int.TryParse(numberString, out numberInput);
+
+                if (!isNumber || numberInput < 0)
+                {
+                    Console.WriteLine("Number does not exist.");
+                    numberString = Console.ReadLine();
+                }
+            } while (!isNumber || numberInput < 0);
+
+            return numberInput;
+        }
 
 
 

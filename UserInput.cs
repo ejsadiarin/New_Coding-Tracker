@@ -49,7 +49,12 @@ namespace New_Coding_Tracker
 
         public int GetRowId()
         {
-
+            bool checkId = true;
+            int id;
+            do
+            {
+                id = Validation.
+            }
         }
 
 
