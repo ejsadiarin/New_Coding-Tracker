@@ -41,7 +41,7 @@ namespace New_Coding_Tracker
         }
         public void UpdateRecord()
         {
-            Console.Clear();
+            /*Console.Clear();*/
             ViewRecord();
 
             // instantiate CodingSession and UserInput
@@ -69,11 +69,11 @@ namespace New_Coding_Tracker
             } while ((!isNumber || idInt < 0 || string.IsNullOrEmpty(idInput)));*/
             /*var chosenId = userInput.GetById(idInt);*/
 
-            while (codingSession.Id == 0)
+            /*while (codingSession.Id == 0)
             {
                 Console.WriteLine($"\nRecord with id {idInput} doesn't exist\n");
                 UpdateRecord();
-            }
+            }*/
 
             // create while loop for continous updating process until updateProcess evaluates to false
             bool updateProcess = true;
