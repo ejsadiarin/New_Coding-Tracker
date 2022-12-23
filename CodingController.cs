@@ -1,17 +1,49 @@
-﻿using System;
+﻿using New_Coding_Tracker.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace New_Coding_Tracker
+namespace New_Coding_Tracker.Controller
 {
-    class Model
+    public class CodingController
     {
-        // used to interact with database and has business logic
+        // main List table for reference
+        internal static List<CodingSession> sessionList = new List<CodingSession>();
 
-       public void MainMenu() 
-       {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public void MainMenu()
+        {
             bool closeApp = false;
 
             while (closeApp == false)
@@ -27,7 +59,7 @@ namespace New_Coding_Tracker
                 Console.WriteLine("Enter Q - to quit/close application");
 
                 string userInput = Console.ReadLine();
-                Controller controller = new Controller();
+                
 
                 // Validate
                 while (string.IsNullOrEmpty(userInput))
@@ -41,20 +73,19 @@ namespace New_Coding_Tracker
                     case "A":
                         Console.Clear();
                         Console.WriteLine("You selected to add a record.\n");
-                        controller.AddRecord();
+                        
                         break;
                     case "V":
                         Console.Clear();
                         Console.WriteLine("Here are your current records:\n");
-                        controller.ViewRecord();
+                        
                         break;
                     case "U":
-                        controller.UpdateRecord();
+                        
                         break;
                     case "D":
                         Console.Clear();
                         Console.WriteLine("What ID of the record you want to delete.\n ");
-                        controller.DeleteRecord();
                         break;
                     case "Q":
                         closeApp = true;
@@ -66,14 +97,9 @@ namespace New_Coding_Tracker
 
         }
 
-        public void UpdateMenu()
-        {
-            Console.WriteLine("Enter 1 - to update the date of the chosen record Id");
-            Console.WriteLine("Enter 2 - to update the start and end time of the chosen record Id");
-            Console.WriteLine("Enter 0 - to go back to the main menu\n");
-        }
-     
+
+
+
 
     }
 }
-

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace New_Coding_Tracker
-{
+{ 
     public class UserInput
     {
        

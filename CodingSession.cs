@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace New_Coding_Tracker
+namespace New_Coding_Tracker.Models
 {
     public class CodingSession
     {

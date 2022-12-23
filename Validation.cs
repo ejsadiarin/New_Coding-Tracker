@@ -11,26 +11,7 @@ namespace New_Coding_Tracker
     internal class Validation
     {
 
-        // validate endTime should be more than startTime
-        public void ValidateTime(DateTime checkStart, DateTime checkEnd)
-        {
-            if (checkEnd < checkStart)
-            {
-                Console.WriteLine("End time must be later than start time.");
-                return;
-            }
-        }
-
-        // check if duration is negative
-        public bool isDurationNegative(TimeSpan time)
-        {
-            bool ts = time.Minutes > 0; 
-            if (!ts)
-            {
-                Console.WriteLine("Time cannot be negative.");
-            }
-                return ts;
-        }
+       
 
 
 

@@ -5,16 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using Microsoft.Data.Sqlite;
-using static New_Coding_Tracker.CodingSession;
+using New_Coding_Tracker.Models;
+using New_Coding_Tracker.Visualization;
+using New_Coding_Tracker.Controller;
 
-namespace New_Coding_Tracker
+namespace New_Coding_Tracker.DatabaseAccess
 {
     public class DatabaseAccess
     {
-        internal string connectionString = ConfigurationManager.AppSettings.Get("ConnectionString");
-
+        internal static string connectionString = ConfigurationManager.AppSettings.Get("ConnectionString");
+        
         // Create Table
-        public void CreateTable(string connectionString)
+        public static void CreateTable(string connectionString)
         {
             using (var connection = new SqliteConnection(connectionString))
             {
@@ -91,9 +93,9 @@ namespace New_Coding_Tracker
         }
 
         // View Table
-        public List<CodingSession> ViewTable()
+        public static List<CodingSession> ViewTable()
         {
-            List<CodingSession> tableData = new List<CodingSession>();
+            
             using (var connection = new SqliteConnection(connectionString))
             {
                 using (var cmd = connection.CreateCommand())
@@ -107,8 +109,8 @@ namespace New_Coding_Tracker
                         {
                             while (reader.Read())
                             {
-                                // Add to the tableData List, that references to CodingSession class' necessary properties
-                                tableData.Add(
+                                // Add to the List, that references to CodingSession class' necessary properties
+                                CodingController.sessionList.Add(
                                     new CodingSession
                                     {
                                         Id = reader.GetInt32(0),
@@ -126,9 +128,10 @@ namespace New_Coding_Tracker
                     }
                 }
             }
-            TableVisualizationEngine.ShowTableVisualization(tableData);
+            
+            TableVisualizationEngine.ShowTableVisualization();
 
-            return tableData;
+            return CodingController.sessionList;
 
         }
 

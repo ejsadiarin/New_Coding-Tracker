@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ConsoleTableExt;
-using New_Coding_Tracker;
+using New_Coding_Tracker.Controller;
 
-namespace New_Coding_Tracker
+namespace New_Coding_Tracker.Visualization
 {
     internal class TableVisualizationEngine
     {
-        public static void ShowTableVisualization<T>(List<T> tableData) where T : class
+        public static void ShowTableVisualization()
         {
             ConsoleTableBuilder
-                .From(tableData)
+                .From(CodingController.sessionList)
                 .WithTitle("CodingSession")
                 .ExportAndWriteLine();
             Console.WriteLine("\n\n");
