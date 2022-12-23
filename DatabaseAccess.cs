@@ -16,16 +16,16 @@ namespace New_Coding_Tracker.DatabaseAccess
         internal static string connectionString = ConfigurationManager.AppSettings.Get("ConnectionString");
         
         // Create Table
-        public static void CreateTable(string connectionString)
+        public static void CreateTable()
         {
             using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
-                
-                var tableCmd = connection.CreateCommand();
 
-                tableCmd.CommandText =
-                    @"CREATE TABLE IF NOT EXISTS codingtracker (
+                using (var cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText =
+                        @"CREATE TABLE IF NOT EXISTS codingtracker (
                         Id INTEGER PRIMARY KEY AUTOINCREMENT, 
                         Date TEXT,
                         StartTime TEXT,
@@ -33,41 +33,53 @@ namespace New_Coding_Tracker.DatabaseAccess
                         Duration TEXT
                     )";
 
-                tableCmd.ExecuteNonQuery();
-                
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
 
         // Insert Table
-        public void InsertTable(CodingSession codingSession)
+        public static void InsertTable(string date, string startTime, string endTime, string duration)
         {
             using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = $"INSERT INTO codingtracker (Date, StartTime, EndTime, Duration) VALUES ('{codingSession.Date}', '{codingSession.StartTime}', '{codingSession.EndTime}', '{codingSession.Duration}')";
+                    cmd.CommandText = "INSERT INTO codingtracker (Date, StartTime, EndTime, Duration) VALUES (@date, @startTime, @endTime, @duration)";
+                    cmd.Parameters.AddWithValue("@date", date);
+                    cmd.Parameters.AddWithValue("@startTime", startTime);
+                    cmd.Parameters.AddWithValue("@endTime", endTime);
+                    cmd.Parameters.AddWithValue("@duration", duration);
+                    cmd.Prepare();
+
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
         // Update Table
-        public void UpdateTable(CodingSession codingSession)
+        public static void UpdateTable(int id, string date, string startTime, string endTime, string duration)
         {
             using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = $@"UPDATE codingtracker SET 
-                                            Date = '{codingSession.Date}', 
-                                            StartTime = '{codingSession.StartTime}', 
-                                            EndTime = '{codingSession.EndTime}',
-                                            Duration = '{codingSession.Duration}' 
+                    cmd.CommandText = @"UPDATE codingtracker SET 
+                                            Date = @date, 
+                                            StartTime = @startTime,
+                                            EndTime = @endTime,
+                                            Duration = @duration 
                                         WHERE 
-                                            Id = {codingSession.Id}
+                                            Id = @id
                                         ";
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@date", date);
+                    cmd.Parameters.AddWithValue("@startTime", startTime);
+                    cmd.Parameters.AddWithValue("@endTime", endTime);
+                    cmd.Parameters.AddWithValue("@duration", duration);
+                    cmd.Prepare();
 
                     cmd.ExecuteNonQuery();
                 }
@@ -76,7 +88,7 @@ namespace New_Coding_Tracker.DatabaseAccess
 
 
         // Delete Table
-        public void DeleteTable(int id)
+        public static void DeleteTable(int id)
         {
             using (var connection = new SqliteConnection(connectionString)) 
             {
@@ -93,7 +105,7 @@ namespace New_Coding_Tracker.DatabaseAccess
         }
 
         // View Table
-        public static List<CodingSession> ViewTable()
+        public static void ViewTable()
         {
             
             using (var connection = new SqliteConnection(connectionString))
@@ -111,7 +123,7 @@ namespace New_Coding_Tracker.DatabaseAccess
                             {
                                 // Add to the List, that references to CodingSession class' necessary properties
                                 CodingController.sessionList.Add(
-                                    new CodingSession
+                                    new Models.CodingSession
                                     {
                                         Id = reader.GetInt32(0),
                                         Date = reader.GetString(1),
@@ -130,8 +142,6 @@ namespace New_Coding_Tracker.DatabaseAccess
             }
             
             TableVisualizationEngine.ShowTableVisualization();
-
-            return CodingController.sessionList;
 
         }
 

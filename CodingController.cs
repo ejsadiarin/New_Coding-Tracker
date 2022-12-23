@@ -42,7 +42,7 @@ namespace New_Coding_Tracker.Controller
 
 
 
-        public void MainMenu()
+        public static void MainMenu()
         {
             bool closeApp = false;
 
