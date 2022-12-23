@@ -12,7 +12,7 @@ namespace New_Coding_Tracker
     public class UserInput
     {
        
-        internal Model model = new Model();
+      /* 
 
         public string GetDateInput()
         {
@@ -49,8 +49,8 @@ namespace New_Coding_Tracker
 
         }
 
-       /* internal CodingSession GetById(int id)
-        {
+       *//* internal CodingSession GetById(int id)
+        {/*
             string connectionString = ConfigurationManager.AppSettings.Get("ConnectionString");
             using (var connection = new SqliteConnection(connectionString))
             {

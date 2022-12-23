@@ -12,7 +12,30 @@ namespace New_Coding_Tracker.Controller
         // main List table for reference
         internal static List<CodingSession> sessionList = new List<CodingSession>();
 
+        internal static void Add()
+        {
+            Console.Clear();
+            DatabaseAccess.ViewTable();
+            Console.WriteLine("\nYou selected to add a record.");
 
+            // Get date input
+            Console.WriteLine("\nAdd a date:");
+            string date = Console.ReadLine();
+
+            // Get start time input
+            Console.WriteLine("\nAdd a start time with format H:mm tt (ex. 7:07 PM):");
+            string startTime = Console.ReadLine();
+
+            // Get end time input
+            Console.WriteLine("\nAdd an end time with format H:mm tt (ex. 7:07 PM):");
+            string endTime = Console.ReadLine();
+
+            // Duration
+            Console.WriteLine("mock duration");
+            string duration = Console.ReadLine();
+
+            DatabaseAccess.InsertTable(date, startTime, endTime, duration);
+        }
 
 
 
@@ -44,6 +67,7 @@ namespace New_Coding_Tracker.Controller
 
         public static void MainMenu()
         {
+            DatabaseAccess.CreateTable();
             bool closeApp = false;
 
             while (closeApp == false)
@@ -64,28 +88,25 @@ namespace New_Coding_Tracker.Controller
                 // Validate
                 while (string.IsNullOrEmpty(userInput))
                 {
-                    Console.WriteLine("\nInvalid Command. Please type a number from 0 to 4.\n");
+                    Console.WriteLine("\nInvalid Command. Please type the within the appropriate options.\n");
                     userInput = Console.ReadLine();
                 }
 
                 switch (userInput.ToUpper())
                 {
                     case "A":
-                        Console.Clear();
-                        Console.WriteLine("You selected to add a record.\n");
-                        
+                        Add();    
                         break;
+                    
                     case "V":
-                        Console.Clear();
-                        Console.WriteLine("Here are your current records:\n");
+                        DatabaseAccess.ViewTable();
                         
                         break;
                     case "U":
                         
                         break;
                     case "D":
-                        Console.Clear();
-                        Console.WriteLine("What ID of the record you want to delete.\n ");
+ 
                         break;
                     case "Q":
                         closeApp = true;

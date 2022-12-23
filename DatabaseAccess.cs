@@ -9,7 +9,7 @@ using New_Coding_Tracker.Models;
 using New_Coding_Tracker.Visualization;
 using New_Coding_Tracker.Controller;
 
-namespace New_Coding_Tracker.DatabaseAccess
+namespace New_Coding_Tracker
 {
     public class DatabaseAccess
     {
