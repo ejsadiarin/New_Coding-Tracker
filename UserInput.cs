@@ -1,4 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
+using New_Coding_Tracker.Controller;
+using New_Coding_Tracker.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,17 +13,17 @@ namespace New_Coding_Tracker
 { 
     public class UserInput
     {
-       
-      /* 
-
-        public string GetDateInput()
+        internal static string GetDateInput()
         {
-            Console.WriteLine("\nEnter the date (Format: MM/dd/yyyy) or enter 0 to go back to the Main Menu:");
             string dateString = Console.ReadLine();
 
-            if (dateString == "0") model.MainMenu();
+            if (dateString == "0") 
+            {
+                Console.Clear();
+                CodingController.MainMenu();
+            }
 
-            while (!DateTime.TryParseExact(dateString, "MM/dd/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+            while (!DateTime.TryParseExact(dateString, "M/d/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
             {
                 Console.WriteLine("Invalid date format.");
                 dateString= Console.ReadLine();
@@ -30,16 +32,18 @@ namespace New_Coding_Tracker
             return dateString;
         }
 
-        public string GetTime()
+        internal static string GetTime()
         {
-            // Format is: Hours:Minutes:Seconds so 00:00:00
-            Console.WriteLine("\nEnter the time (Format: HH:mm:ss) or enter 0 to go back to the Main Menu:");
-            string? timeString = Console.ReadLine();
+            string timeString = Console.ReadLine();
 
-            if (timeString == "0") model.MainMenu();
+            if (timeString == "0")
+            {
+                Console.Clear();
+                CodingController.MainMenu();
+            }
             else
             {
-                while (!DateTime.TryParseExact(timeString, "HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+                while (!DateTime.TryParseExact(timeString, "h:mm tt", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
                 {
                     Console.WriteLine("Invalid time format.");
                     timeString = Console.ReadLine();
@@ -49,38 +53,17 @@ namespace New_Coding_Tracker
 
         }
 
-       *//* internal CodingSession GetById(int id)
-        {/*
-            string connectionString = ConfigurationManager.AppSettings.Get("ConnectionString");
-            using (var connection = new SqliteConnection(connectionString))
-            {
-                using (var tableCmd = connection.CreateCommand())
-                {
-                    connection.Open();
+        internal static bool DoesIdExist(int id)
+        {
+            return CodingController.sessionList.Any(item => item.Id == id);
+        }
 
-                    tableCmd.CommandText = $"SELECT * FROM codingtracker Where Id = '{id}'";
+        internal static CodingSession Find(int id)
+        {
+            return CodingController.sessionList.FirstOrDefault(item => item.Id == id);
+        }
 
-                    using (var reader = tableCmd.ExecuteReader())
-                    {
-                        CodingSession codingSession = new();
-                        if (reader.HasRows)
-                        {
-                            reader.Read();
-                            codingSession.Id = reader.GetInt32(0);
-                            codingSession.Date = reader.GetString(1);
-                            codingSession.StartTime = reader.GetString(2);
-                            codingSession.EndTime = reader.GetString(3);
-                            codingSession.Duration = reader.GetString(4);
-                        }
-
-                        Console.WriteLine("\n\n");
-
-                        return codingSession;
-                    };
-                }
-            }
-        }*/
-
+        
 
     }
 }
