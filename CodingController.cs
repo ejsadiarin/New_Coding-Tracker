@@ -55,14 +55,23 @@ namespace New_Coding_Tracker.Controller
             // Check if Id exists on the sessionList
             if (UserInput.DoesIdExist(id))
             {
-                UserInput.Find(id);
+                /*var getId = UserInput.Find(id);*/
+                Console.WriteLine("\nEnter new date with format m/d/yyyy (ex. 1/23/2023):");
+                var newDate = UserInput.GetDateInput();
+                Console.WriteLine("\nEnter new start time with format h:mm tt (ex. 7:07 PM):");
+                var newStart = UserInput.GetTime();
+                Console.WriteLine("\nEnter new end time with format h:mm tt (ex. 7:07 PM):");
+                var newEnd = UserInput.GetTime();
+                Console.WriteLine("\nmock duration");
+                string dur = Console.ReadLine();
+
+                DatabaseAccess.UpdateTable(id, newDate, newStart, newEnd, dur);
             }
             else
             {
                 Console.WriteLine("Id doesn't exist. Please try again.");
                 idInput = Console.ReadLine();
             }
-            DatabaseAccess.UpdateTable(id, );
 
             Console.WriteLine("Row has been updated. Hit enter to return to main menu.");
             Console.ReadLine();
