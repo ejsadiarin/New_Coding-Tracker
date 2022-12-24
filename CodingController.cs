@@ -112,6 +112,7 @@ namespace New_Coding_Tracker.Controller
             DateTime start = DateTime.Parse(startTime);
             DateTime end = DateTime.Parse(endTime);
 
+            // check if end is later than start
             Validation.ValidateTime(start, end);
 
             TimeSpan durationTs = end - start;
