@@ -1,6 +1,7 @@
 ﻿using New_Coding_Tracker.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,6 @@ namespace New_Coding_Tracker.Controller
         internal static void Add()
         {
             Console.Clear();
-            DatabaseAccess.ViewTable();
             Console.WriteLine("\nYou selected to add a record.");
 
             // Get date input
@@ -32,7 +32,7 @@ namespace New_Coding_Tracker.Controller
 
             // Duration
             Console.WriteLine("mock duration");
-            string duration = Console.ReadLine();
+            string duration = CalculateDuration(startTime, endTime);
 
             DatabaseAccess.InsertTable(date, startTime, endTime, duration);
 
@@ -57,13 +57,13 @@ namespace New_Coding_Tracker.Controller
             {
                 /*var getId = UserInput.Find(id);*/
                 Console.WriteLine("\nEnter new date with format m/d/yyyy (ex. 1/23/2023):");
-                var newDate = UserInput.GetDateInput();
+                string newDate = UserInput.GetDateInput();
                 Console.WriteLine("\nEnter new start time with format h:mm tt (ex. 7:07 PM):");
-                var newStart = UserInput.GetTime();
+                string newStart = UserInput.GetTime();
                 Console.WriteLine("\nEnter new end time with format h:mm tt (ex. 7:07 PM):");
-                var newEnd = UserInput.GetTime();
+                string newEnd = UserInput.GetTime();
                 Console.WriteLine("\nmock duration");
-                string dur = Console.ReadLine();
+                string dur = CalculateDuration(newStart, newEnd);
 
                 DatabaseAccess.UpdateTable(id, newDate, newStart, newEnd, dur);
             }
@@ -107,7 +107,19 @@ namespace New_Coding_Tracker.Controller
             Console.Clear();
         }
 
+        internal static string CalculateDuration(string startTime, string endTime) // return string value "duration"
+        {
+            DateTime start = DateTime.Parse(startTime);
+            DateTime end = DateTime.Parse(endTime);
 
+            Validation.ValidateTime(start, end);
+
+            TimeSpan durationTs = end - start;
+            string duration = durationTs.ToString();
+
+            Validation.isDurationNegative(durationTs);
+            return duration;
+        }
 
 
 

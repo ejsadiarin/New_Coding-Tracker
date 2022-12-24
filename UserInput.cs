@@ -43,7 +43,7 @@ namespace New_Coding_Tracker
             }
             else
             {
-                while (!DateTime.TryParseExact(timeString, "h:mm tt", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+                while (!DateTime.TryParseExact(timeString, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
                 {
                     Console.WriteLine("Invalid time format.");
                     timeString = Console.ReadLine();
