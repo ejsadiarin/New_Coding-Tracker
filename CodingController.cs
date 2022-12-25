@@ -30,7 +30,6 @@ namespace New_Coding_Tracker.Controller
             string endTime = UserInput.GetTime();
 
             // Duration
-            Console.WriteLine("mock duration");
             string duration = CalculateDuration(startTime, endTime);
 
             DatabaseAccess.InsertTable(date, startTime, endTime, duration);
@@ -108,42 +107,18 @@ namespace New_Coding_Tracker.Controller
 
         internal static string CalculateDuration(string startTime, string endTime) // return string value "duration"
         {
-            TimeSpan start = TimeSpan.ParseExact(startTime, "HH:mm", CultureInfo.InvariantCulture);
-            TimeSpan end = TimeSpan.ParseExact(endTime, "HH:mm", CultureInfo.InvariantCulture);
-            // validate should be start < end (start before end)
-            bool checkTs = Validation.CheckStartIsBeforeEnd(start, end);
+            DateTime start = DateTime.Parse(startTime);
+            DateTime end = DateTime.Parse(endTime);
 
-            do
-            {
-                if (checkTs == false)
-                {
-                    Console.WriteLine("Start time should be earlier than end time");
-                    Console.WriteLine("Hit enter to return to main menu.");
-                    Console.ReadLine();
-                    MainMenu();
-                }
-                TimeSpan durationTs = end - start;
-                string duration = durationTs.ToString();
-                return duration;
+            // check if end is later than start
+            Validation.ValidateTime(start, end);
 
+            TimeSpan durationTs = end - start;
+            string duration = durationTs.ToString();
 
-            } while (checkTs == true);
-
+            Validation.isDurationNegative(durationTs);
+            return duration;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -169,7 +144,7 @@ namespace New_Coding_Tracker.Controller
                 Console.WriteLine("Enter Q - to quit/close application");
 
                 string userInput = Console.ReadLine();
-                
+
 
                 // Validate
                 while (string.IsNullOrEmpty(userInput))
@@ -181,17 +156,17 @@ namespace New_Coding_Tracker.Controller
                 switch (userInput.ToUpper())
                 {
                     case "A":
-                        Add();    
+                        Add();
                         break;
-                    
+
                     case "V":
                         Get();
                         break;
 
                     case "U":
-                        Update();                       
+                        Update();
                         break;
-                    
+
                     case "D":
                         Delete();
                         break;

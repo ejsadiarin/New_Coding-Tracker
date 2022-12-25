@@ -5,25 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using Microsoft.Data.Sqlite;
-using static New_Coding_Tracker.CodingSession;
+using New_Coding_Tracker.Visualization;
+using New_Coding_Tracker.Controller;
+using System.Reflection;
 
 namespace New_Coding_Tracker
 {
     public class DatabaseAccess
     {
-        internal string connectionString = ConfigurationManager.AppSettings.Get("ConnectionString");
+        internal static string connectionString = ConfigurationManager.AppSettings.Get("ConnectionString");
 
         // Create Table
-        public void CreateTable(string connectionString)
+        public static void CreateTable()
         {
             using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
-                
-                var tableCmd = connection.CreateCommand();
 
-                tableCmd.CommandText =
-                    @"CREATE TABLE IF NOT EXISTS codingtracker (
+                using (var cmd = connection.CreateCommand())
+                {
+                    cmd.CommandText =
+                        @"CREATE TABLE IF NOT EXISTS codingtracker (
                         Id INTEGER PRIMARY KEY AUTOINCREMENT, 
                         Date TEXT,
                         StartTime TEXT,
@@ -31,46 +33,64 @@ namespace New_Coding_Tracker
                         Duration TEXT
                     )";
 
-                tableCmd.ExecuteNonQuery();
-                
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
 
         // Insert Table
-        public void InsertTable(CodingSession codingSession)
+        public static void InsertTable(string date, string startTime, string endTime, string duration)
         {
             using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = $"INSERT INTO codingtracker (Date, StartTime, EndTime, Duration) VALUES ('{codingSession.Date}', '{codingSession.StartTime}', '{codingSession.EndTime}', '{codingSession.Duration}')";
+                    cmd.CommandText = "INSERT INTO codingtracker (Date, StartTime, EndTime, Duration) VALUES (@date, @startTime, @endTime, @duration)";
+                    cmd.Parameters.AddWithValue("@date", date);
+                    cmd.Parameters.AddWithValue("@startTime", startTime);
+                    cmd.Parameters.AddWithValue("@endTime", endTime);
+                    cmd.Parameters.AddWithValue("@duration", duration);
+                    cmd.Prepare();
+
                     cmd.ExecuteNonQuery();
                 }
             }
         }
 
         // Update Table
-        public void UpdateTable(CodingSession codingSession)
+        public static void UpdateTable(int id, string date, string startTime, string endTime, string duration)
         {
             using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = $"UPDATE codingtracker SET Date = '{codingSession.Date}', StartTime = '{codingSession.StartTime}', EndTime = '{codingSession.EndTime}' WHERE Id = '{codingSession.Id}'"; 
+                    cmd.CommandText = @"UPDATE codingtracker SET 
+                                            Date = @date, 
+                                            StartTime = @startTime,
+                                            EndTime = @endTime,
+                                            Duration = @duration 
+                                        WHERE 
+                                            Id = @id
+                                        ";
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@date", date);
+                    cmd.Parameters.AddWithValue("@startTime", startTime);
+                    cmd.Parameters.AddWithValue("@endTime", endTime);
+                    cmd.Parameters.AddWithValue("@duration", duration);
+                    cmd.Prepare();
 
                     cmd.ExecuteNonQuery();
                 }
             }
-            Console.WriteLine($"Changes in Record Id: {codingSession.Id} was updated successfully.");
         }
 
 
         // Delete Table
-        public void DeleteTable(int id)
+        public static void DeleteTable(int id)
         {
-            using (var connection = new SqliteConnection(connectionString)) 
+            using (var connection = new SqliteConnection(connectionString))
             {
                 connection.Open();
                 using (var cmd = connection.CreateCommand())
@@ -85,9 +105,9 @@ namespace New_Coding_Tracker
         }
 
         // View Table
-        public List<CodingSession> ViewTable()
+        public static void ViewTable()
         {
-            List<CodingSession> tableData = new List<CodingSession>();
+
             using (var connection = new SqliteConnection(connectionString))
             {
                 using (var cmd = connection.CreateCommand())
@@ -101,8 +121,8 @@ namespace New_Coding_Tracker
                         {
                             while (reader.Read())
                             {
-                                // Add to the tableData List, that references to CodingSession class' necessary properties
-                                tableData.Add(
+                                // Add to the List, that references to CodingSession class' necessary properties
+                                CodingController.sessionList.Add(
                                     new CodingSession
                                     {
                                         Id = reader.GetInt32(0),
@@ -120,9 +140,8 @@ namespace New_Coding_Tracker
                     }
                 }
             }
-            TableVisualizationEngine.ShowTableVisualization(tableData);
 
-            return tableData;
+            TableVisualizationEngine.ShowTableVisualization();
 
         }
 

@@ -1,20 +1,16 @@
 ﻿using System;
 using System.Configuration;
+using New_Coding_Tracker.Controller;
 
 namespace New_Coding_Tracker
 {
     class Program
     {
-        static string connectionString = ConfigurationManager.AppSettings.Get("ConnectionString");
         static void Main(string[] args)
         {
-            // instantiate classes
-            DatabaseAccess dbAccess = new DatabaseAccess();
-            Model model = new Model();
-            // add the methods here
-            dbAccess.CreateTable(connectionString);
-            model.MainMenu();
-            
+            // call static MainMenu() method from Controller
+            CodingController.MainMenu();
+
         }
     }
 }
