@@ -30,6 +30,7 @@ namespace New_Coding_Tracker.Controller
             string endTime = UserInput.GetTime();
 
             // Duration
+            Console.WriteLine("mock duration");
             string duration = CalculateDuration(startTime, endTime);
 
             DatabaseAccess.InsertTable(date, startTime, endTime, duration);
@@ -126,6 +127,20 @@ namespace New_Coding_Tracker.Controller
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public static void MainMenu()
         {
             DatabaseAccess.CreateTable();
@@ -144,7 +159,7 @@ namespace New_Coding_Tracker.Controller
                 Console.WriteLine("Enter Q - to quit/close application");
 
                 string userInput = Console.ReadLine();
-
+                
 
                 // Validate
                 while (string.IsNullOrEmpty(userInput))
@@ -156,17 +171,17 @@ namespace New_Coding_Tracker.Controller
                 switch (userInput.ToUpper())
                 {
                     case "A":
-                        Add();
+                        Add();    
                         break;
-
+                    
                     case "V":
                         Get();
                         break;
 
                     case "U":
-                        Update();
+                        Update();                       
                         break;
-
+                    
                     case "D":
                         Delete();
                         break;
