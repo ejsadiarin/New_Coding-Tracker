@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using New_Coding_Tracker.Controller;
+using New_Coding_Tracker.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,7 +17,7 @@ namespace New_Coding_Tracker
         {
             string dateString = Console.ReadLine();
 
-            if (dateString == "0")
+            if (dateString == "0") 
             {
                 Console.Clear();
                 CodingController.MainMenu();
@@ -61,8 +62,5 @@ namespace New_Coding_Tracker
         {
             return CodingController.sessionList.FirstOrDefault(item => item.Id == id);
         }
-
-
-
     }
 }

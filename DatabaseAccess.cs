@@ -7,6 +7,7 @@ using System.Configuration;
 using Microsoft.Data.Sqlite;
 using New_Coding_Tracker.Visualization;
 using New_Coding_Tracker.Controller;
+using New_Coding_Tracker.Models;
 using System.Reflection;
 
 namespace New_Coding_Tracker
