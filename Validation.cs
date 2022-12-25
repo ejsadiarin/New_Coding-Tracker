@@ -30,11 +30,7 @@ namespace New_Coding_Tracker
             }
         }
 
-        // check if Id exist
-        public void CheckIdExist(int id)
-        {
-
-        }
+       
 
         // check if input string isNullOrEmpty
 

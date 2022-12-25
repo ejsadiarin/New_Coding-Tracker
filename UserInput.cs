@@ -37,11 +37,22 @@ namespace New_Coding_Tracker
 
             if (timeString == "0") model.MainMenu();
 
-            while (!DateTime.TryParseExact(timeString, "HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out time))
+            if (timeString == "0")
             {
-                Console.WriteLine("Invalid time format.");
-                timeString = Console.ReadLine();
+                Console.Clear();
+                CodingController.MainMenu();
             }
+            else
+            {
+                while (!DateTime.TryParseExact(timeString, "h:mm tt", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+                {
+                    Console.WriteLine("Invalid time format.");
+                    timeString = Console.ReadLine();
+                }
+            }
+            return timeString;
+
+        }
 
             return time;
 
